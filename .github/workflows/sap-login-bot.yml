@@ -1,0 +1,36 @@
+name: SAP BTP Auto Login (多账号版)
+
+on:
+  schedule:
+    - cron: "0 0 */10 * *"   # 每10天运行一次（UTC 0点）
+  workflow_dispatch:
+
+jobs:
+  login:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install playwright axios form-data
+
+      - name: Run login script
+        run: node scripts/login.js
+        env:
+          SAP_ACCOUNTS: ${{ secrets.SAP_ACCOUNTS }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+
+      - name: Upload screenshots as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sap-btp-screenshots
+          path: |
+            *.png
