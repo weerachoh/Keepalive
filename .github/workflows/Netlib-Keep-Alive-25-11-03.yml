@@ -2,7 +2,7 @@ name: Netlib-Keep-Alive-25-11-03Keep Alive Login
 
 on:
   schedule:
-    - cron: "0 0 5,25 * *"  # 每月 1 号和 31 号凌晨0点
+    - cron: "0 0 5,25 * *"  # 每月 5 号和 25 号凌晨0点
   workflow_dispatch:       # 支持手动触发
 
 jobs:
@@ -28,7 +28,7 @@ jobs:
       - name: Run Keep Alive Login
         env:
           SITE_ACCOUNTS: ${{ secrets.SITE_ACCOUNTS }}
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
         run: |
           python Netlib-Keep-Alive/login.py
