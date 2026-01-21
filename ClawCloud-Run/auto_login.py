@@ -230,13 +230,13 @@ class AutoLogin:
         """
         try:
             parsed = urlparse(url)
-            host = parsed.netloc  # 如 "ap-southeast-1.console.claw.cloud"
+            host = parsed.netloc  # 如 "ap-southeast-1.run.claw.cloud"
             
             # 检查是否是区域子域名格式
-            # 格式: {region}.console.claw.cloud
-            if host.endswith('.console.claw.cloud'):
-                region = host.replace('.console.claw.cloud', '')
-                if region and region != 'console':  # 排除无效情况
+            # 格式: {region}.run.claw.cloud
+            if host.endswith('.run.claw.cloud'):
+                region = host.replace('.run.claw.cloud', '')
+                if region and region != 'run':  # 排除无效情况
                     self.detected_region = region
                     self.region_base_url = f"https://{host}"
                     self.log(f"检测到区域: {region}", "SUCCESS")
@@ -252,7 +252,7 @@ class AutoLogin:
                 if region_match:
                     region = region_match.group(1)
                     self.detected_region = region
-                    self.region_base_url = f"https://{region}.console.claw.cloud"
+                    self.region_base_url = f"https://{region}.run.claw.cloud"
                     self.log(f"从路径检测到区域: {region}", "SUCCESS")
                     return region
             
