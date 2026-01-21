@@ -188,7 +188,7 @@ class AutoLogin:
         self.n = 0
         
         # 区域相关
-        self.detected_region = ap-northeast-1'  # 检测到的区域，如 "ap-southeast-1"
+        self.detected_region = 'ap-northeast-1'  # 检测到的区域，如 "ap-southeast-1"
         self.region_base_url = 'https://ap-northeast-1.run.claw.cloud'  # 检测到的区域基础 URL
         
     def log(self, msg, level="INFO"):
